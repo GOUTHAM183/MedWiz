@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "C:\\Users\\Goutham M\\.conda\\envs\\myEnv\\python.exe",
+    "python.autoComplete.extraPaths": [
+        "./**"
+    ],
+    "liveServer.settings.port": 5502,
+}   
+ 

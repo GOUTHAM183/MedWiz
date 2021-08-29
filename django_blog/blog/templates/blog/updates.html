@@ -1,0 +1,25 @@
+{%extends "blog/base.html" %} 
+{% block content%}
+    {% for update in updates%}
+        <article class="media content-section">
+            
+            <div class="media-body">
+            <div class="article-metadata">
+                
+                <small class="text-muted">{{ update.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2>
+                <a class="article-title" href="{% url 'update-detail' update.id %}"
+                >{{ update.title }}</a></h2><small class="text-muted">&uarr; Click on title to read more.</small>
+                
+            
+            <p class="article-content">{{ update.content| slice:300 | safe }}</p>
+            <a href="{% url 'update-detail' update.id %}"></a>
+            
+            
+            </div>
+
+        </article>
+
+    {% endfor %} 
+{% endblock%}

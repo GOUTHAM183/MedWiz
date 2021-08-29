@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %} 
+{% block content%}
+    {% if searched %}
+        <h1>You Searched For -> {{ searched }}</h1>
+        <br>
+        <h3 style="text-decoration: underline;">Diseases</h3>
+        {% for post in posts %}
+            -> <a href="{% url 'post-detail' post.id %}">{{ post }}</a>
+            <br>
+            <br>
+        {% endfor %}
+        <br>
+        <h3 style="text-decoration: underline;">Medicines</h3>
+        {% for medicine in medicines %}
+            -> <a href="{% url 'medicine-detail' medicine.id %}">{{ medicine }}</a>
+            <br>
+            <br>
+        {% endfor %}
+        <br>
+        <h3 style="text-decoration: underline;">Updates</h3>
+        {% for update in updates %}
+            -> <a href="{% url 'update-detail' update.id %}">{{ update }}</a>
+            <br>
+            <br>
+        {% endfor %}
+    {% else %}
+        <h1>You forgot to enter value into search bar!! </h1>
+        <script>for(var x=0;x<=25;x++){document.write("<br>")}</script>
+    {% endif %}
+{% endblock%}
+

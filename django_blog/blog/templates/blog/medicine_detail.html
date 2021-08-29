@@ -1,0 +1,19 @@
+{%extends "blog/base.html" %} {% block content%}
+<article class="media content-section">
+  
+  <div class="media-body">
+    <div class="article-metadata">
+      
+      <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+      
+    </div>
+    <h2 class="article-title">{{ object.title }}</h2>
+    {% if object.image %}
+      <img src="{{ object.image.url }}" height="50%" width="50%" > 
+    {% endif %}
+      <p class="article-content">{{ object.content|safe }}</p>
+
+  
+  
+</article>
+{% endblock%}

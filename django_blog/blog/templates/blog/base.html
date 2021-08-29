@@ -1,0 +1,181 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'blog/main.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/footer.css'%}" type="text/css">
+    <style type='text/css'>
+      iframe.goog-te-banner-frame{ display: none !important;}
+      #goog-gt-tt, .goog-te-balloon-frame{display: none !important;} 
+      .goog-text-highlight { background: none !important; box-shadow: none !important;}
+      </style>
+      
+      <style type='text/css'>
+
+      body {position: static !important; top:0px !important;}
+      </style>
+      
+      <style type='text/css'>
+      .goog-logo-link {display:none !important;} 
+      .goog-te-gadget{color: transparent !important;}
+      </style>
+    {%if title %}
+
+    <title>MedWiz - {{ title }}</title>
+    {%else%}
+    <title>MedWiz</title>
+    {%endif%}
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'home'%}">MedWiz</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarToggle"
+            aria-controls="navbarToggle"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'home'%}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'medicines'%}">Medicines</a>
+              <a class="nav-item nav-link" href="{% url 'updates'%}">Updates</a>
+              <a class="nav-item nav-link" href="{% url 'contact'%}">Appointment's</a>
+              <a class="nav-item nav-link" href="{% url 'about'%}">About</a>
+            </div>
+            
+            
+          </div>
+          <form method="post" action="{% url 'speech_to_text' %}">
+            {% csrf_token %}
+            <input type="hidden"  name="record">
+            <button class="btn btn-outline-secondary"><i class="fa fa-microphone" style="font-size:24px;color: white;"></i></button>
+          </form>
+
+          <form class="d-flex" method=POST action="{% url 'search' %}">
+            {% csrf_token %}
+            
+            <input class="form-control me-2" value="{{data}}" type="search" placeholder="Search" aria-label="Search" name="searched">
+            <div  class="button-search">
+              <button class="btn btn-outline-secondary" type="submit" >Search</button>
+            </div>
+          </form>
+          
+        </div>
+        <div id="google_translate_element"></div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+    
+        <div class="row">
+          <div class="col-md-8">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                  {{message}}
+                </div>
+              {%endfor %}
+            {%endif%}
+            {% block content %}{% endblock %}
+          </div>
+          
+        </div>
+      </main>
+      
+
+
+ <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">MedWiz <i>Our goal is to make a one stop hub for all Medical related news and developments within the medical field with reliable sources and veriﬁed content.</i>We are looking to build a website which is going to have a simple user interface with all the information needed available at the user’s ﬁngertips.</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            
+            <ul class="footer-links">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="{% url 'about' %}">About Us</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Contribute</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="https://www.google.com/maps/place/Bengaluru,+Karnataka/@12.95396,77.4908529,11z/data=!3m1!4b1!4m5!3m4!1s0x3bae1670c9b44e6d:0xf8dfc3e8517e4fe0!8m2!3d12.9715987!4d77.5945627">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; | 2021 All Rights Reserved by 
+         <a href="#">MedWiz</a>.
+            </p>
+          </div>
+
+          
+        </div>
+      </div>
+</footer>
+
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+  </script>
+  
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+  
+ <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    
+    
+  </body>
+</html>
